@@ -9,7 +9,16 @@ public class HibernateUtil {
 
     private static SessionFactory build() {
         try {
-            return new Configuration().configure().buildSessionFactory();
+            Configuration cfg = new Configuration().configure();
+
+            // Chaque développeur peut avoir son propre mot de passe MySQL
+            // sans modifier hibernate.cfg.xml : set DB_PASSWORD=...
+            String password = System.getenv("DB_PASSWORD");
+            if (password != null && !password.isBlank()) {
+                cfg.setProperty("hibernate.connection.password", password);
+            }
+
+            return cfg.buildSessionFactory();
         } catch (Throwable ex) {
             ex.printStackTrace();
             throw new ExceptionInInitializerError(ex);
