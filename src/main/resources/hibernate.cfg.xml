@@ -7,7 +7,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/videotheque?createDatabaseIfNotExist=true&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">salma2005</property>
+    <property name="hibernate.connection.password">root</property>
 
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
