@@ -85,4 +85,33 @@ public class FilmDAO extends GenericDAO<Film, Long> {
                         .setMaxResults(limite)
                         .list());
     }
+
+    /** Nombre total de résultats (mêmes filtres que rechercher), pour la pagination. */
+    public long countRecherche(String titre, Long categorieId, String realisateur,
+                               Integer annee, boolean seulementPublies) {
+        StringBuilder hql = new StringBuilder("select count(f) from Film f where 1=1");
+        Map<String, Object> params = new HashMap<>();
+        if (seulementPublies) hql.append(" and f.publie = true");
+        if (titre != null && !titre.isBlank()) {
+            hql.append(" and lower(f.titre) like :titre");
+            params.put("titre", "%" + titre.trim().toLowerCase() + "%");
+        }
+        if (categorieId != null) {
+            hql.append(" and f.categorie.id = :cat");
+            params.put("cat", categorieId);
+        }
+        if (realisateur != null && !realisateur.isBlank()) {
+            hql.append(" and lower(f.realisateur) like :real");
+            params.put("real", "%" + realisateur.trim().toLowerCase() + "%");
+        }
+        if (annee != null) {
+            hql.append(" and f.anneeSortie = :annee");
+            params.put("annee", annee);
+        }
+        return inSession(s -> {
+            var q = s.createQuery(hql.toString(), Long.class);
+            params.forEach(q::setParameter);
+            return q.getSingleResult();
+        });
+    }
 }
