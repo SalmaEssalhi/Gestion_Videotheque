@@ -27,7 +27,8 @@
       <ul class="navbar-nav">
         <c:choose>
           <c:when test="${not empty sessionScope.user}">
-            <li class="nav-item"><span class="navbar-text me-3"><c:out value="${sessionScope.user.prenom}"/></span></li>
+            <li class="nav-item"><a class="nav-link" href="${ctx}/mes-emprunts">Mes emprunts</a></li>
+            <li class="nav-item"><span class="navbar-text mx-3"><c:out value="${sessionScope.user.prenom}"/></span></li>
             <li class="nav-item"><a class="nav-link" href="${ctx}/logout">Déconnexion</a></li>
           </c:when>
           <c:otherwise>
