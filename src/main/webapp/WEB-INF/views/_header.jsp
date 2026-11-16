@@ -20,14 +20,18 @@
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav me-auto">
         <c:if test="${sessionScope.user.role == 'ADMIN'}">
+          <li class="nav-item"><a class="nav-link" href="${ctx}/admin/dashboard">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="${ctx}/admin/categories">Catégories</a></li>
           <li class="nav-item"><a class="nav-link" href="${ctx}/admin/films">Films</a></li>
+          <li class="nav-item"><a class="nav-link" href="${ctx}/admin/emprunts">Emprunts</a></li>
+          <li class="nav-item"><a class="nav-link" href="${ctx}/admin/paiements">Paiements</a></li>
         </c:if>
       </ul>
       <ul class="navbar-nav">
         <c:choose>
           <c:when test="${not empty sessionScope.user}">
             <li class="nav-item"><a class="nav-link" href="${ctx}/mes-emprunts">Mes emprunts</a></li>
+            <li class="nav-item"><a class="nav-link" href="${ctx}/mes-paiements">Mes paiements</a></li>
             <li class="nav-item"><span class="navbar-text mx-3"><c:out value="${sessionScope.user.prenom}"/></span></li>
             <li class="nav-item"><a class="nav-link" href="${ctx}/logout">Déconnexion</a></li>
           </c:when>
