@@ -2,11 +2,11 @@ package ma.ensa.videotheque.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "emprunt")
 public class Emprunt {
-
+    private static final DateTimeFormatter FR = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +40,17 @@ public class Emprunt {
         return statut == StatutEmprunt.EN_COURS && !estExpire();
     }
 
+    public String getDateEmpruntFr() {
+        return dateEmprunt == null ? "" : dateEmprunt.format(FR);
+    }
+
+    public String getDateExpirationFr() {
+        return dateExpiration == null ? "" : dateExpiration.format(FR);
+    }
+
+    public String getDateRetourFr() {
+        return dateRetour == null ? "" : dateRetour.format(FR);
+    }
     public void confirmerPaiement() {
         this.statut = StatutEmprunt.EN_COURS;
         this.dateExpiration = LocalDateTime.now().plusHours(48);   // RG5

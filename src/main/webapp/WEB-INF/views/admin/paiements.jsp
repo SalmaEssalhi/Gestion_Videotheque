@@ -14,7 +14,7 @@
       <tbody>
       <c:forEach var="p" items="${paiements}">
         <tr>
-          <td>${p.datePaiement}</td>
+          <td>${p.datePaiementFr}</td>
           <td><c:out value="${p.emprunt.utilisateur.login}"/></td>
           <td><c:out value="${p.emprunt.film.titre}"/></td>
           <td><fmt:formatNumber value="${p.montant}" minFractionDigits="2"/> ${p.devise}</td>

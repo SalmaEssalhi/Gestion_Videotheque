@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 <jsp:include page="/WEB-INF/views/_header.jsp"><jsp:param name="titre" value="Mes emprunts"/></jsp:include>
 
 <h2 class="mb-4">Mes emprunts</h2>
@@ -25,7 +25,7 @@
             ${e.statut}
           </span>
         </td>
-        <td>${fn:replace(fn:substring(e.dateExpiration, 0, 16), 'T', ' ')}</td>
+        <td>${e.dateExpirationFr}</td>
         <td class="text-end text-nowrap">
           <c:if test="${e.statut == 'EN_COURS'}">
             <a class="btn btn-primary btn-sm" href="${ctx}/lecteur?idEmprunt=${e.id}">Visionner</a>

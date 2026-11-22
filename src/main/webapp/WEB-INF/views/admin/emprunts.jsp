@@ -16,8 +16,8 @@
           <td>${e.id}</td>
           <td><c:out value="${e.utilisateur.login}"/></td>
           <td><c:out value="${e.film.titre}"/></td>
-          <td>${e.dateEmprunt}</td>
-          <td>${e.dateExpiration}</td>
+          <td>${e.dateEmpruntFr}</td>
+          <td>${e.dateExpirationFr}</td>
           <td><span class="badge bg-secondary">${e.statut}</span></td>
         </tr>
       </c:forEach>

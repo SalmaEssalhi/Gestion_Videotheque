@@ -3,11 +3,11 @@ package ma.ensa.videotheque.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "paiement")
 public class Paiement {
-
+    private static final DateTimeFormatter FR = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +32,9 @@ public class Paiement {
     public Paiement() {}
 
     public boolean estReussi() { return statut == StatutPaiement.REUSSI; }
-
+    public String getDatePaiementFr() {
+        return datePaiement == null ? "" : datePaiement.format(FR);
+    }
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public BigDecimal getMontant() { return montant; }

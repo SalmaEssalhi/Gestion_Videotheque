@@ -11,8 +11,7 @@ import ma.ensa.videotheque.model.Utilisateur;
 public class AuthFilter implements Filter {
 
     private static final List<String> PUBLIC_PREFIXES =
-            List.of("/login", "/inscription", "/catalogue", "/css/", "/js/", "/images/");
-
+            List.of("/login", "/inscription", "/catalogue", "/film", "/css/", "/js/", "/images/");
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

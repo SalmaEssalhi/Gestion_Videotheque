@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <jsp:include page="/WEB-INF/views/_header.jsp"><jsp:param name="titre" value="Catalogue"/></jsp:include>
 
 <h2 class="mb-4">Catalogue</h2>
@@ -44,12 +45,19 @@
       <div class="card h-100 film-card">
         <c:choose>
           <c:when test="${not empty f.afficheUrl}">
-            <img src="<c:out value='${f.afficheUrl}'/>" alt="Affiche">
+            <c:choose>
+              <c:when test="${fn:startsWith(f.afficheUrl, 'http')}">
+                <img src="<c:out value='${f.afficheUrl}'/>" alt="Affiche">
+              </c:when>
+              <c:otherwise>
+                <img src="${ctx}/images/affiches/<c:out value='${f.afficheUrl}'/>" alt="Affiche">
+              </c:otherwise>
+            </c:choose>
           </c:when>
           <c:otherwise><div class="noimg">Pas d'affiche</div></c:otherwise>
         </c:choose>
         <div class="card-body">
-          <h3 class="h6"><c:out value="${f.titre}"/></h3>
+          <h3 class="h6"><a class="text-decoration-none" href="${ctx}/film?id=${f.id}"><c:out value="${f.titre}"/></a></h3>
           <div class="text-muted small">
             <c:out value="${f.categorie.nom}"/> · ${f.anneeSortie} · ${f.dureeMinutes} min
           </div>
