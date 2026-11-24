@@ -32,7 +32,9 @@ public class LecteurServlet extends HttpServlet {
             return;
         }
 
-        Long id = ParamUtil.toLong(req.getParameter("id"));
+        String p = req.getParameter("idEmprunt");
+        if (p == null) p = req.getParameter("id");
+        Long id = ParamUtil.toLong(p);
         Emprunt emprunt = service.verifierAcces(id, user.getId());       // RG14 + RG15
 
         if ("/lecteur/flux".equals(req.getServletPath())) {
