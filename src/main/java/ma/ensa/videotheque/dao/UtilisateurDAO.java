@@ -29,4 +29,11 @@ public class UtilisateurDAO extends GenericDAO<Utilisateur, Long> {
     public boolean existsByEmail(String email) {
         return findByEmail(email) != null;
     }
+    /* Nombre total d'emprunts d'un utilisateur (pour interdire la suppression) */
+    public long countEmprunts(Long utilisateurId) {
+        return inSession(s ->
+                s.createQuery("select count(e) from Emprunt e where e.utilisateur.id = :id", Long.class)
+                        .setParameter("id", utilisateurId)
+                        .getSingleResult());
+    }
 }
